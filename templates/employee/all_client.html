@@ -119,7 +119,7 @@ CKBSSL employee | Client List
                                           </thead>
           
                                           <tbody>
-                                            {% for client in all_clients %}  
+                                            {% for client in pagination_data_list %}  
                                               <tr>
                                                 <td>{{ forloop.revcounter }}</td>
                                                 <td>{{ client.client.membership_no }}</td>
@@ -150,6 +150,7 @@ CKBSSL employee | Client List
                           
                           </div>  
                 </div> 
+            <div class="d-flex justify-content-center my-2">{% include 'pagination.html' %}</div>
             </div>  <!-- /.col -->
         </div>  <!-- /.row -->
     </section>  <!-- /.content -->

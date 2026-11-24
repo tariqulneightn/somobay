@@ -1,0 +1,235 @@
+{% extends 'employee_base.html' %}
+
+{% block title %}
+CKBSSL employee | Client Detail
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+
+  <!-- Main content -->
+  <section class="content">
+      <div class="">
+          <div class="col-12">
+              <div class="">
+                  <div class="">
+                      <div class="row">
+                      <div class="col-md-6 float-sm-left">
+                          <h3 class="text-secondary">{{ client.name }}</h3>
+                      </div>
+                      
+                      </div>  <!-- /.header row  -->
+                  </div>  
+
+                  <div class="">
+                      <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+                        <div class="col-md-12 client-detail justify-content-center text-secondary mt-3 ml-4 pl-4">
+                            <!-- <p class="font-weight-bold">Client: <span class="text-dark">{{ client.first_name }}</span></p> -->
+                            <p class="font-weight-bold">Name: <span class="text-dark">{{ client.name }}</span></p>
+                            <p class="font-weight-bold">Phone Number: <span class="text-dark">{{ client.phone }}</span></p>
+                            <p class="font-weight-bold">NID No: <span class="text-dark">{{ client.nid }}</span></p>
+                            <p class="font-weight-bold">Loan Amount: <span class="text-dark">{{ client.loan_amount }}</span></p>
+                            <p class="font-weight-bold">Product: 
+                                                        {% for product in products %}
+                                                        <span class="text-dark">{{ product.product_name }},
+
+                                                        </span>
+                                                        {% endfor %}    
+                                                        </p>
+                            <p class="font-weight-bold">Loan Taking Data: <span class="text-dark">{{ client.created_at }}</span></p>
+                            <p class="font-weight-bold">Loan Return Time Period: <span class="text-dark">{{ client.loan_return_period }}</span></p>
+                          
+                            
+                            <!-- <P class="font-weight-bold">
+                              Branch List: 
+                              <ul>
+                                {% for branch_detail in branches_detail %}
+                                  <li class="text-dark">{{ branch_detail.branch.branch_name }}</li>
+                                {% endfor %}
+                              </ul>
+                            </P> -->
+                        </div>
+                        <div class="row col-auto col-lg-12 col-md-12 justify-content-center">
+
+                            <div class="col-md-6" id="loan_return_btn">
+                                <button type="submit" class="btn btn-secondary active float-left" >
+                                  <a href="#" style="color:white;" onclick="show_return_form()">+ Entry New Return</a>
+                              </button>
+                                
+                            </div>
+                            <div class="col-md-6" style="display: none;" id="loan_return">
+                                <form method="post" action="{% url 'owner:loan-return-entry' id=client.id %}" class="col-lg-11 col-md-12">
+                                    {% csrf_token %}
+                                    <input type="number" class="col-lg-5 col-md-5" name="loan_return_amount" placeholder="Return amount">
+                                    <input type="date" class="col-lg-5 col-md-5" name="loan_return_date">
+                                    <button type="submit" class="btn py-1">Ok</button>
+                                </form>
+                                
+                            </div>
+
+                            
+
+                            <div class="col-md-6" id="saving_entry_btn">
+                                <button type="submit" class="btn btn-secondary active float-right">
+                                  <a href="#" style="color:white;" onclick="show_saving_form()">+ Entry Savings</a>
+                              </button>
+                                
+                            </div>
+                            <div class="col-md-6 float-right" style="display: none;" id="saving_entry">
+                                <form method="post"  class="col-lg-11 col-md-12 float-right" action="{% url 'owner:saving-entry' id=client.id %}">
+                                    {% csrf_token %}
+                                    <input type="number" class="col-lg-5 col-md-5 " name="saving_amount" placeholder="Savings amount">
+                                    <input type="date" class="col-lg-5 col-md-5 " name="saving_date">
+                                    <button type="submit" class="btn py-1 float-right">Ok</button>
+                                </form>
+                                
+                            </div>
+
+                            <div class="col-md-6 float-left my-2" id="loan_entry_btn">
+                              <button type="submit" class="btn btn-secondary active float-left" >
+                                <a href="#" style="color:white;" onclick="show_loan_form()">+ Entry New Loan</a>
+                            </button>
+                              
+                          </div>
+                          <div class="col-md-6 float-left" style="display: none;" id="loan_form">
+                              <form method="post" action="{% url 'owner:new_loan_entry' id=client.id %}" class="col-lg-11 col-md-12">
+                                  {% csrf_token %}
+                                  <input type="number" class="col-lg-3 col-md-3" name="new_loan_amount" placeholder="New Loan amount">
+                                  <input type="number" class="col-lg-3 col-md-3" name="loan_return_period" placeholder="Loan Return Period">
+                                  <input type="date" class="col-lg-4 col-md-4" name="new_loan_date">
+                                  <button type="submit" class="btn py-1">Ok</button>
+                              </form>
+                              
+                          </div>
+
+                            <div class="col-md-6 float-right my-2" id="saving_withdraw_btn">
+                              <button type="submit" class="btn btn-secondary active float-right">
+                                <a href="#" style="color:white;" onclick="show_withdraw_form()">+ Withdraw Savings</a>
+                            </button>
+                              
+                          </div>
+                          <div class="col-md-12 float-right my-2" style="display: none;" id="withdraw_entry">
+                              <form method="post"  class="col-lg-5 col-md-6 float-right" action="{% url 'owner:withdraw-entry' id=client.id %}">
+                                  {% csrf_token %}
+                                  <input type="number" class="col-lg-5 col-md-5 " name="withdraw_amount" placeholder="Withdraw amount">
+                                  <input type="date" class="col-lg-5 col-md-5 " name="withdraw_date">
+                                  <button type="submit" class="btn py-1 float-right">Ok</button>
+                              </form>
+                              
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-12 justify-content-center">
+                            <h5 class="text-uppercase">Loan's Details</h5>
+                            <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive table-striped">
+                              
+                              <thead>
+                                  
+                                  <tr>
+                                      <th>S.N.</th>
+                                      <th>Total Loan</th>
+                                      <th>Return Amount</th>
+                                      <th>Return Date</th>
+                                      <th>Total Returned</th>
+                                      <th>Remaining Loan</th>
+                                  </tr>
+
+                              </thead>
+    
+                              <tbody>
+                                {% for each_return in return_details %}
+                                  <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ client.loan_amount }}</td>
+                                    <td>{{ each_return.loan_return_amount }}</td>
+                                    <td>{{ each_return.loan_return_date }}</td>
+                                    <td>{{ each_return.total_returned }}</td>
+                                    <td>{{ each_return.remaining_loan }}</td>
+                                    
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                          </table>
+
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-12 justify-content-center">
+                            <h5 class="text-uppercase">Saving's Details</h5>
+                            <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive table-striped">
+                              
+                              <thead>
+                                  
+                                  <tr>
+                                      <th>S.N.</th>
+                                      <th>Saving date</th>
+                                      <th>Saving amount</th>
+                                      <th>Total Savings</th>
+                                      <th>Withdraw date</th>
+                                      <th>Withdraw amount</th>
+                                      <th>Total Withdraw</th>
+                                      <th>Remaining Savings</th>
+                                      
+                                  </tr>
+
+                              </thead>
+    
+                              <tbody>
+                                {% for each_saving in saving_details %}
+                                  <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ each_saving.saving_date }}</td>
+                                    <td>{{ each_saving.saving_amount }}</td>
+                                    <td>{{ each_saving.total_savings }}</td>
+                                    <td>{{ each_saving.withdraw_date }}</td>
+                                    <td>{{ each_saving.withdraw_amount }}</td>
+                                    <td>{{ each_saving.total_withdraw }}</th>
+                                    <td>{{ each_saving.remaining_saving }}</th>
+                                    
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                          </table>
+
+                          </div>
+                            
+                        </div>
+                      
+                    </div>    
+                  </div> 
+              </div>  
+          </div>  <!-- /.col -->
+      </div>  <!-- /.row -->
+  </section>  <!-- /.content -->
+</div>  <!-- /.content-wrapper -->
+<script>
+const show_return_form = () => {
+    let target_element_btn = document.getElementById("loan_return_btn")
+    let target_element_form = document.getElementById("loan_return")
+
+    target_element_btn.style.display = "none";
+    target_element_form.style.display = "block"
+}
+
+const show_saving_form = () => {
+    let target_element_btn = document.getElementById("saving_entry_btn")
+    let target_element_form = document.getElementById("saving_entry")
+
+    target_element_btn.style.display = "none";
+    target_element_form.style.display = "block"
+}
+
+const show_withdraw_form = () => {
+  let target_element_btn = document.getElementById("saving_withdraw_btn")
+  let target_element_form = document.getElementById("withdraw_entry")
+
+  target_element_btn.style.display = "none";
+  target_element_form.style.display = "block"
+}
+
+const show_loan_form = () =>{
+  let target_element_btn = document.getElementById("loan_entry_btn")
+  let target_element_form = document.getElementById("loan_form")
+
+  target_element_btn.style.display = "none";
+  target_element_form.style.display = "block"
+}
+</script>
+{% endblock %}

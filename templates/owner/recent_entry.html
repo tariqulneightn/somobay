@@ -1,0 +1,179 @@
+{% extends 'owner_base.html' %}
+
+{% block title %}
+CKBSSL OWNER | COLLECTION LIST
+{% endblock %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+   
+  
+    <!-- Main content -->
+    <section class="content">
+        <div class="">
+            <div class="col-12">
+                <div class="">
+                    <div class="col-md-12 bg-light-gray d-flex flex-row justify-content-center mt-3">
+                      <div class="col-md-10 p-2 m-1 filter_block shadow justify-content-center">
+                          <h4 class="m-2 filter_block_heading">
+                              Search From Recent Entry
+                          </h4>
+                        <form class="col-md-12" method="get" action="{% url 'owner:search_recent_entry' %}" id="patientFilterForm">
+                          
+                          <div class="row justify-content-center">
+                            <div class="col-lg-3 col-md-4 col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                <label class="filter_parameter_lable">Collection Date(From): </label>
+                                <input type="date" class="filter_parameter_input" name="date_from">
+                            </div>
+    
+                            <div class="col-lg-3 col-md-4 col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                <label class="filter_parameter_lable">Collection Date(To): </label>
+                                <input type="date" class="filter_parameter_input" name="date_to">
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                              <label class="filter_parameter_lable">Employee: </label>
+                              <select name="employee" id="employee" class="filter_parameter_input">
+                                  <option value="">Employee</option>
+                                  {% for employee in all_employee %}
+                                  <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
+                                  {% endfor %}
+                                  
+                              </select>
+                            </div>
+                          </div>
+                          
+                         
+                          <div class="form-row text-center" >
+                              <div class="col-12 mt-2">
+                                  <button class="btn btn-outline-dark col-md-4 col-lg-4">Search</button>
+                              </div>
+                              
+                          </div>
+                            
+                        </form>
+  
+                      </div>
+                      
+                  </div>
+  
+                    <div class="row-flex">
+  
+                          <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+
+                            <h4 class="m-2 filter_block_heading">
+                                Last 7-Day's Entry
+                            </h4>
+                              
+                            <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+                                  
+                                <!-- Search form -->
+                                <!-- <div class="active-cyan-4 mb-4">
+                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                </div> -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12 justify-content-center">
+                                    <h5 class="text-uppercase"><span style="color: rgb(255, 0, 0); font-weight: bold;">Loan</span> Entry</h5>
+                                    <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive mt-1 table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>S.N.</th>
+                                                
+                                                <th>Employee Name</th>
+                                                
+                                                <th>Client Name</th>
+                                                
+                                                <th>Returned Amount</th>
+
+                                                <th>Return Date</th>
+                                                
+                                                <th>Entry Date</th>
+                                                
+                                                <!-- <th>Total Saving Collection</th> -->
+
+                                                
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            {% for loan_entry in all_loan_entry %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ loan_entry.employee.user.first_name }}</td>
+                                                <td>{{ loan_entry.client.name }}</td>
+                                                <td>{{ loan_entry.loan_return_amount }}</td>
+                                                <td>{{ loan_entry.loan_return_date }}</td>
+                                                
+                                                <td>{{ loan_entry.created_at }}</td>
+                                                <!-- <td></td> -->
+                                                
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12 justify-content-center">
+                                    <h5 class="text-uppercase"><span style="color: rgb(255, 0, 0); font-weight: bold;">Saving</span> Entry</h5>
+                                    <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive mt-1 table-striped">
+                                        <thead>
+                                            
+                                            <tr>
+                                                <th>S.N.</th>
+                                                
+                                                <th>Employee Name</th>
+                                                
+                                                <th>Client</th>
+                                                
+                                                <th>Returned Amount</th>
+
+                                                <!-- <th>Total Loan Collection</th> -->
+                                                
+                                                <th>Return Date</th>
+                                                
+                                                <th>Entry Date</th>
+
+                                                
+                                            </tr>
+                                            
+                                        </thead>
+        
+                                        <tbody>
+                                            {% for saving_entry in all_savings_entry %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ saving_entry.employee.user.first_name }}</td>
+                                                <td>{{ saving_entry.client.name }}</td>
+                                                <td>{{ saving_entry.saving_amount }}</td>
+                                                <td>{{ saving_entry.saving_date }}</td>
+                                                
+                                                <td>{{ saving_entry.created_at }}</td>
+                                                <!-- <td></td> -->
+                                                
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+  
+                            
+                          
+                            </div>  
+                </div> 
+            </div>  <!-- /.col -->
+        </div>  <!-- /.row -->
+    </section>  <!-- /.content -->
+  </div>  <!-- /.content-wrapper -->
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+
+
+  </script>
+ 
+
+{% endblock %}

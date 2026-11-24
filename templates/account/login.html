@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}
+    CKBSSL | LOGIN
+{% endblock %}
+
+{% block content %}
+
+<div id="login">
+    <div class="text-center mt-4">
+        <p class="text-center text-uppercase text-danger">*Note: <span class="text-capitalize">Please Login with Valid Email and Password</span></p>
+    </div>
+    <div class="container">
+        <div id="login-row" class="col-md-12 d-flex flex-row justify-content-center">
+            <div id="login-column" class="col-md-7 col-lg-7 col-sm-8 new_entry_form p-5 pt-4 mt-5 shadow form-content">
+                {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h3 class="text-center text-uppercase">Login</h3>
+                <div id="" class="col-md-12 pt-4">
+                    <form id="login-form" class="form" action="" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-group col-md-12 col-lg-12 m-2 p-0">
+                            <div class="col-lg-3 col-md-3 m-0 p-0 ml-4">
+                                <label for="email" class="col-form-label text-light">E-mail</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 m-0 p-0">
+                                <input type="email" placeholder="E-mail" name="email" id="email" class="form-control">
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-md-12 col-lg-12 m-2 p-0">
+                            <div class="col-lg-3 col-md-3 m-0 p-0 ml-4">
+                                <label for="password" class="col-form-label  text-light">Password</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 m-0 p-0">
+                                <input type="password" placeholder="Please enter Valid Password" 
+                                    name="password" id="password" class="form-control" id="password">
+                                <input type="checkbox" onclick="view_password()"> Show Password
+                            </div>
+                            
+                            
+                        </div>
+                        
+
+                          <div class="form-row text-center mt-4">
+                            <div class="col-12">
+                                <div class="">
+                                    
+                                    <button type="submit" class="btn btn-outline-dark col-md-4 col-lg-4">Login</button>
+                                </div>  
+                            </div>  
+                        </div> 
+                        <div id="formFooter" class="text-center pt-4">
+                            
+                                <a class="underlineHover text-warning" href="#">Forgot Password?</a>
+                            
+                            
+                        </div>
+                    </form>
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Login Start -->
+<!-- 
+                    <form id="login-form" class="form" action="" method="post">
+                        {% csrf_token %}
+                        <div class="col-lg-6">
+                            <div class="login-form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>E-mail / Username</label>
+                                        <input class="form-control" type="text" placeholder="E-mail / Username" name="email"> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Password</label>
+                                        <input class="form-control" type="text" placeholder="Password" name="password">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="newaccount">
+                                            <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form> -->
+<script type="text/javascript">
+    const view_password = () => {
+        let el = document.getElementById("password");
+
+        if(el.type == "password"){
+        el.type = "text";
+        }
+        else{
+        el.type = "password";
+        }
+    }
+</script>
+
+
+{% endblock %}

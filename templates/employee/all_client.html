@@ -1,0 +1,162 @@
+{% extends 'employee_base.html' %}
+
+{% block title %}
+CKBSSL employee | Client List
+{% endblock %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+   
+  
+    <!-- Main content -->
+    <section class="content">
+        <div class="">
+            <div class="col-12">
+                <div class="">
+                    <div class="col-md-12 bg-light-gray d-flex flex-row justify-content-center mt-3">
+                      <div class="col-md-10 p-2 m-1 filter_block shadow justify-content-center">
+                          <h4 class="m-2 filter_block_heading">
+                              Search Client
+                          </h4>
+                        <form class="col-md-12" method="get" action="{% url 'employee:search_client' %}" id="patientFilterForm">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-2 col-md-2  col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                    <label class="filter_parameter_lable">Name: </label>
+                                    <input type="text" class="filter_parameter_input" name="client_name">
+                                </div>
+        
+                                <div class="col-lg-3 col-md-3   col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                    <label class="filter_parameter_lable">Phone: </label>
+                                    <input type="text" class="filter_parameter_input" name="client_phone">
+                                </div>
+        
+                                <div class="col-lg-3 col-md-3   col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                    <label class="filter_parameter_lable">NID: </label>
+                                    <input type="text" class="filter_parameter_input" name="client_nid">
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                                    <label class="filter_parameter_lable">Return Time Period: </label>
+                                    <select name="return_time_period" id="return_time_period" class="filter_parameter_input">
+                                        <option value="">Select Time</option>
+                                        <option value="1">1 Day</option>
+                                        <option value="2">2 Day</option>
+                                        <option value="3">3 Day</option>
+                                        <option value="7">7 Day</option>
+                                        <option value="15">15 Day</option>
+                                        <option value="15">30 Day</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                          <!-- <div class="col-lg-2 col-md-3 col-sm-6 m-0 p-0 pb-2  filter_parameter_block" style="display: inline-block;">
+                            <label class="filter_parameter_lable">Return Time Period: </label>
+                            <select name="employee" id="employee" class="filter_parameter_input">
+                                <option value="">Employee</option>
+                                {% for employee in all_employee %}
+                                <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
+                                {% endfor %}
+                                
+                            </select>
+                        </div> -->
+                          
+                         
+                          <div class="form-row text-center" >
+                              <div class="col-12 mt-2">
+                                  <button class="btn btn-outline-dark col-md-4 col-lg-4">Search Client</button>
+                              </div>
+                              
+                          </div>
+                            
+                      </form>
+  
+                      </div>
+                      
+                  </div>
+  
+                    <div class="row-flex">
+  
+                          <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+
+                            <h4 class="m-2 filter_block_heading">
+                                Clients
+                            </h4>
+                              
+                              <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+                                  
+                                  <!-- Search form -->
+                                  <!-- <div class="active-cyan-4 mb-4">
+                                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                  </div> -->
+                                  <div class="row col-lg-12 col-md-12 col-sm-12 col-12 justify-content-center">
+                                      <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive mt-1 table-striped">
+                                          <thead>
+                                              <tr>
+                                                  <th>S.N.</th>
+                                                  <th>Mem. No.</th>
+                                                  <th>Name</th>
+                                                  <th>NID</th>
+                                                  
+                                                  <th>Phone No.</th>
+                                                  <th>Employee</th>
+                                                  <th>Loan Amount</th>
+                                                  <!-- <th>Product</th> -->
+                                                  <th>Start Date</th>
+                                                  <th>Return Period</th>
+                                                  <!-- <th>Returned</th> -->
+                                                  <th>Exp Date</th>
+                                                  
+                                                  <th>Saving Start Date</th>
+                                                  <th>Total Savings</th>
+                                                  <th>Details</th>
+                                                  
+                                                
+                                              </tr>
+                                          </thead>
+          
+                                          <tbody>
+                                            {% for client in all_clients %}  
+                                              <tr>
+                                                <td>{{ forloop.revcounter }}</td>
+                                                <td>{{ client.client.membership_no }}</td>
+                                                <td>{{ client.client.name }}</td>
+                                                <td>{{ client.client.nid }}</td>
+                                                
+                                                <td>{{ client.client.phone }}</td>
+                                                <td>{{ client.client.employee_for.user.first_name }}</td>
+                                                <td>{{ client.client.loan_amount }}</td>
+                                                <!-- <td>{{ client.client.product }}</td> -->
+                                                <td>{{ client.client.created_at }}</td>
+                                                <td>{{ client.client.loan_return_period }}</td>
+                                                <!-- <td><input type="checkbox" checked></td> -->
+                                                <td>{{ client.loan_exp_date }}</td>
+                                                
+                                                <td>{{ client.saving_start_date }}</td>
+                                                <td>{{ client.total_savings }}</td>
+                                                <td><a class="btn btn-outline-secondary py-0" type="button" href="{% url 'employee:client_details' id=client.client.id %}">Details</a></td>
+                                                
+                                                
+                                              </tr>
+                                            {% endfor %}
+                                          </tbody>
+                                      </table>
+                                  </div>
+  
+                            
+                          
+                          </div>  
+                </div> 
+            </div>  <!-- /.col -->
+        </div>  <!-- /.row -->
+    </section>  <!-- /.content -->
+  </div>  <!-- /.content-wrapper -->
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+ 
+
+{% endblock %}

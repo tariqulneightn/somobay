@@ -1,0 +1,306 @@
+{% extends 'owner_base.html' %}
+
+{% block title %}
+CKBSSL Owner
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="content-wrapper">
+
+    <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 pt-5">
+                        <p class="content_heading">Add New Client</p>
+                    </div>
+                </div> 
+
+                <div class="com-md-12 d-flex flex-row justify-content-center">
+                    <div class="col-lg-4 col-md-5 col-sm-6">
+                    {% if client_form.errors %}
+                        {% for field in client_form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger col-md-5 col-lg-4 col-sm-6 alert-dismissable">
+                                    <a href="#" class="close" data-dismiss='alert' aria-label='close'>&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-row justify-content-center">  
+                    <div class="col-md-9 col-lg-7 col-sm-12 new_entry_form p-5 pt-4 shadow form-content">
+
+                        <form method="post" action="">
+                            {% csrf_token %}
+
+                    <div class="row justify-content-center col-auto">
+                        <div class="col-md-11 p-0">
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="membership_no" class=" col-form-label">Membership No :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="membership_no" class="form-control" id="membership_no" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="name" class=" col-form-label">Name :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="name" class="form-control" id="name" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="fathers_name" class=" col-form-label">Father's Name :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="fathers_name" class="form-control" id="fathers_name" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="birthdate" class=" col-form-label">Date of Birth :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="date" name="birthdate" class="form-control" id="birthdate" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="nid" class=" col-form-label">NID No. :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="nid" class="form-control" id="nid" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="phone" class=" col-form-label">Phone No. :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="phone" class="form-control" id="phone" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="present_address" class=" col-form-label">Present Address :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="present_address" class="form-control" id="present_address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="business_address" class="col-form-label">Business Address :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="business_address"  class="form-control" id="business_address" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="business_type" class="col-form-label">Business Type :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="business_type"  class="form-control" id="business_type" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div> 
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="loan_amount" class="col-form-label">Loan Amount :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="number" name="loan_amount"  class="form-control" id="loan_amount" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="returnable_amount" class="col-form-label">Returnable Amount :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="number" name="returnable_amount"  class="form-control" id="returnable_amount" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="loan_giving_date" class="col-form-label">Loan Giving Date :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="date" name="loan_giving_date"  class="form-control" id="loan_giving_date" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0 ml-4">
+                                <div class="col-lg-12 col-md-12 m-0 p-0 ml-5">
+                                   <p>Please write product's names and seperate with (,) <span>Ex: Tea, Sugar, Cake</span></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="product" class="col-form-label">Product to Buy With Loan:</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="product"  class="form-control" id="product" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0 ml-4">
+                                <div class="col-lg-12 col-md-12 m-0 p-0 ml-5">
+                                   <p>Please write product's quantity and seperate with (,) as product name sequence<span>Ex: 10, 10, 100</span></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="quantity" class="col-form-label">Product Quantity:</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="quantity"  class="form-control" id="quantity" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0 ml-4">
+                                <div class="col-lg-12 col-md-12 m-0 p-0 ml-5">
+                                   <p>Please write product's price and seperate with (,) as product name sequence<span>Ex: 50, 90, 10</span></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="price" class="col-form-label">Product Price(1 unit):</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="price"  class="form-control" id="price" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="employee_for" class="col-form-label">Employee(loan collector) :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <select class="dropdown form-control" name="employee_for" id="employee_for" placeholder='Select Employee' required>
+
+                                        
+                                        {% for employee in all_employee %}
+                                            <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
+                                        {% endfor %}
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="client_type" class="col-form-label">Client Type :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="checkbox" name="taking_loan" class="radio-input" id="taking_loan" />
+                                    <label>Loan</label>
+                                    <input type="checkbox" name="saving_money" class="radio-input" id="saving_money" />
+                                    <label>Saving</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="loan_amount" class="col-form-label">Loan Return Time Period :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                   
+                                    <input type="radio" name="loan_return_period" value="1" class="radio-input" id="loan_return_period" />
+                                    <label>1 day</label>
+                                    <input type="radio" name="loan_return_period" value="2" class="radio-input" id="loan_return_period" />
+                                    <label>2 days</label>
+                                    <input type="radio" name="loan_return_period" value="3" class="radio-input" id="loan_return_period" />
+                                    <label>3 day</label>
+                                    <input type="radio" name="loan_return_period" value="7" class="radio-input" id="loan_return_period" />
+                                    <label>7 days</label>
+                                    <input type="radio" name="loan_return_period" value="15" class="radio-input" id="loan_return_period" />
+                                    <label>15 day</label>
+                                    <input type="radio" name="loan_return_period" value="30" class="radio-input" id="loan_return_period" />
+                                    <label>30 days</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="register_date" class="col-form-label">Register Date :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="date" name="register_date"  class="form-control" id="register_date" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            
+                            
+                        </div>  
+                    </div> 
+
+                    <div class="form-row text-center">
+                        <div class="col-12">
+                            <div class="">
+                                
+                                <button type="submit" class="btn btn-outline-dark col-md-4 col-lg-4">Save</button>
+                            </div> 
+                        </div>  <!--/.col -->
+                    </div> 
+                </form>
+
+                    </div> 
+                </div> 
+                
+            </div>  <!-- /.container-fluid -->
+        </section>   <!-- /.content -->
+    </div>   <!-- /.content-wrapper -->
+</div>
+{% endblock %}

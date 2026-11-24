@@ -1,0 +1,188 @@
+{% extends 'owner_base.html' %}
+
+{% block title %}
+CKBSSL Owner
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="content-wrapper">
+
+    <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 pt-5">
+                        <p class="content_heading">Add New Employee</h3>
+                    </div>
+                </div> 
+
+                <div class="com-md-12 d-flex flex-row justify-content-center">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                    {% if user_form.errors %}
+                        {% for field in user_form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger col-md-5 col-lg-4 col-sm-6 alert-dismissable">
+                                    <a href="#" class="close" data-dismiss='alert' aria-label='close'>&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if emp_detail_form.errors %}
+                        {% for field in emp_detail_form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger col-md-5 col-lg-4 col-sm-6 alert-dismissable">
+                                    <a href="#" class="close" data-dismiss='alert' aria-label='close'>&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-row justify-content-center">  
+                    <div class="col-md-10 col-lg-8 col-sm-12 new_entry_form p-5 pt-4 shadow form-content">
+
+                        <form method="post" action="">
+                            {% csrf_token %}
+
+                    <div class="row justify-content-center col-auto">
+                        <div class="col-md-8 p-0">
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="name" class=" col-form-label">Name :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="first_name" class="form-control" id="first_name" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="email" class=" col-form-label">Email :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="email" name="email" class="form-control" id="email" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="password" class=" col-form-label">Password :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="password" name="password" class="form-control" id="password" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="fathers_name" class=" col-form-label">Father's Name :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="fathers_name" class="form-control" id="fathers_name" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="birthdate" class=" col-form-label">Date of Birth :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="date" name="birthdate" class="form-control" id="birthdate" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="nid" class=" col-form-label">NID No. :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="nid" class="form-control" id="nid" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="phone" class=" col-form-label">Phone No. :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="phone" class="form-control" id="phone" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="present_address" class=" col-form-label">Present Address :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="present_address" class="form-control" id="present_address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="permanent_address" class="col-form-label">Permanent Address :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="permanent_address"  class="form-control" id="permanent_address" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-11 col-lg-11 m-2 p-0">
+                                <div class="col-lg-4 col-md-4 m-0 p-0 ml-4">
+                                    <label for="designation" class="col-form-label">Designation :</label>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 m-0 p-0">
+                                    <input type="text" name="designation"  class="form-control" id="designation" />
+                                    <!-- <input type="checkbox" onclick="view_password_admin_register()"> Show Password -->
+                                </div>
+                            </div> 
+
+                            
+
+                            
+                            
+                        </div>  
+                    </div> 
+
+                    <div class="form-row text-center">
+                        <div class="col-12">
+                            <div class="">
+                                
+                                <button type="submit" class="btn btn-outline-dark col-md-4 col-lg-4">Register</button>
+                            </div> 
+                        </div>  <!--/.col -->
+                    </div> 
+                </form>
+
+                    </div> 
+                </div> 
+                
+            </div>  <!-- /.container-fluid -->
+        </section>   <!-- /.content -->
+    </div>   <!-- /.content-wrapper -->
+</div>
+{% endblock %}

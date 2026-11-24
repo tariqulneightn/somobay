@@ -1,0 +1,126 @@
+{% extends 'owner_base.html' %}
+
+{% block title %}
+CKBSSL Owner
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+   
+  
+    <!-- Main content -->
+    <section class="content">
+        <div class="">
+            <div class="col-12">
+                
+                    <div class="row-flex">
+  
+                          <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+
+                            <h4 class="m-2 filter_block_heading">
+                                ALL EMPLOYEE 
+                            </h4>
+                              
+                              <div class="row col-md-12 p-0 m-0 d-flex flex-row justify-content-center">
+                                  <!-- Search form -->
+                                  <!-- <div class="active-cyan-4 mb-4">
+                                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                  </div> -->
+                                  <div class="row col-lg-12 col-md-12 col-sm-12 col-12 justify-content-center">
+                                      <table id="client_list" class="table table-hover col-auto col-md-12 table-responsive mt-1 table-striped">
+                                          <thead>
+                                              <tr>
+                                                  <th>S.N.</th>
+                                                  <th>Name</th>
+                                                  <th>NID</th>
+                                                  
+                                                  <th>Phone No.</th>
+                                                  
+                                                  <th>Joined Date</th>
+                                                  <th>Address</th>
+                                                  <!-- <th>1Day %</th> -->
+                                                  
+                                                  <th>15Day's %</th>
+                                                  <th>30Day's %</th>
+                                                  <th>Edit</th>
+                                                  <th>Actions</th>
+                                              </tr>
+                                          </thead>
+          
+                                          <tbody>
+                                              {% for employee in all_employee %}
+                                              <tr>
+                                                {% if employee.employee.user.is_active == True %}
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ employee.employee.user.first_name }}</td>
+                                                <td>{{ employee.employee.nid }}</td>
+                                                
+                                                <td>{{ employee.employee.user.phone }}</td>
+                                                
+                                                <td>{{ employee.employee.created_at }}</td>
+                                                <td>{{ employee.employee.present_address }}</td>
+                                                <!-- <td>1Day %</td> -->
+                                                <td>{{ employee.15_day_avg_percentage }}</td>
+                                                <td>{{ employee.30_day_avg_percentage }}</td>
+                                                {% else %}
+                                                <td>{{ forloop.counter }}</td>
+                                                <td  style="text-decoration:line-through">{{ employee.employee.user.first_name }}</td>
+                                                <td style="text-decoration:line-through">{{ employee.employee.nid }}</td>
+                                                
+                                                <td style="text-decoration:line-through">{{ employee.employee.user.phone }}</td>
+                                                
+                                                <td style="text-decoration:line-through">{{ employee.employee.created_at }}</td>
+                                                <td style="text-decoration:line-through">{{ employee.employee.present_address }}</td>
+                                                <!-- <td>1Day %</td> -->
+                                                <td style="text-decoration:line-through">{{ employee.15_day_avg_percentage }}</td>
+                                                <td style="text-decoration:line-through">{{ employee.30_day_avg_percentage }}</td>
+                                                {% endif %}
+                                                
+                                                <td><a class="btn btn-outline-secondary py-0" type="button" href="{% url 'owner:edit_employee' id=employee.employee.id %}">Edit</a></td>
+                                                {% if employee.employee.user.is_active == True %}
+                                                <td><a id="del_options{{employee.employee.id}}" type="button" class="btn btn-outline-secondary py-0 px-2" onclick="showDelConfirmButtons('{{ employee.employee.id }}')">Deactivate</a>
+                                                    <div id="del{{employee.employee.id}}" style="display: none;">
+                                                        <a class="btn btn-primary py-0 px-2" href="{% url 'owner:remove_employee' id=employee.employee.id %}">Yes</a>
+                                                        <button class="btn btn-danger py-0 px-2" onclick="cancelDelChange('{{ employee.employee.id }}')">No</button>
+                                                    </div>
+                                                </td>
+                                                {% else %}
+                                                <td><a id="del_options{{employee.employee.id}}" type="button" class="btn btn-outline-secondary py-0 px-2 bg-secondary" onclick="showDelConfirmButtons('{{ employee.employee.id }}')">Activate</a>
+                                                    <div id="del{{employee.employee.id}}" style="display: none;">
+                                                        <a class="btn btn-primary py-0 px-2" href="{% url 'owner:activete_employee' id=employee.employee.id %}">Yes</a>
+                                                        <button class="btn btn-danger py-0 px-2" onclick="cancelDelChange('{{ employee.employee.id }}')">No</button>
+                                                    </div>
+                                                </td>
+                                                {% endif %}
+                                                  
+                                              </tr>
+                                              {% endfor %}
+                                              
+                                          </tbody>
+                                      </table>
+                                  </div>
+                          </div>  
+               
+            </div>  <!-- /.col -->
+        </div>  <!-- /.row -->
+    </section>  <!-- /.content -->
+  </div>  <!-- /.content-wrapper -->
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    const showDelConfirmButtons = (id) => {
+      console.log(id)
+      $('#del_options'+id).hide(); // hide the buttons
+      $("#del"+id).css("display", "block"); // view the buttons
+  
+    }
+
+    const cancelDelChange = (id) => {
+    console.log(id)
+    $('#del'+id).hide(); // hide the buttons
+    $("#del_options"+id).css("display", "block"); // view the checkbox
+  }
+
+</script>
+{% endblock %}

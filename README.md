@@ -62,7 +62,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **Database driver note:** `requirements.txt` includes `psycopg2==2.8.6` (PostgreSQL). If you use MySQL (`DB_ENGINE=django.db.backends.mysql`), install a compatible MySQL driver such as `mysqlclient` in your environment.
+> **Runtime & driver note:** `.python-version` pins Python `3.9` for `Django==3.1.5` compatibility. `requirements.txt` includes `gunicorn` (WSGI server), `PyMySQL` + `cryptography` (for `django.db.backends.mysql` via `somobay/__init__.py`), and `psycopg2==2.8.6` (for PostgreSQL).
 
 ### 4. Configure environment variables
 
